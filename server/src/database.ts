@@ -5,7 +5,7 @@ export const collections: {
    employees?: mongodb.Collection<Employee>;
 } = {};
  
-//this is a test
+//this is a test2
 
 export async function connectToDatabase(uri: string) {
    const client = new mongodb.MongoClient(uri);
