@@ -68,9 +68,12 @@ connectToDatabase2(ATLAS_URI)
     //before ni sha then bunch of endpoints
     app.use("/users", userRouter);
 
+    const port = process.env.PORT || 5000;
+    //port = 6000;
+
     // start the Express server
-    app.listen(5200, () => {
-        console.log(`Server running at http://localhost:5200...`);
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}...`);
     });
 
 })
