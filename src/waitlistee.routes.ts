@@ -8,7 +8,7 @@ waitlisteeRouter.use(express.json());
 waitlisteeRouter.get("/", async (_req, res) => {
     console.log("reached");
    try {
-       const waitlistees = await collections.waitlistees.find({}).toArray();
+       const waitlistees = await collections.waitlistees.find({}).sort({_id:-1}).toArray();
        res.status(200).send(waitlistees);
    } catch (error) {
        res.status(500).send(error.message);
