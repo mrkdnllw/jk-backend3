@@ -14,7 +14,7 @@ export async function connectToDatabase3(uri: string) {
    const db = client.db("Customer");
    await applySchemaValidation(db);
  
-   const waitlisteesCollection = db.collection<Waitlistee>("waitlistees2");
+   const waitlisteesCollection = db.collection<Waitlistee>("waitlistees");
    collections.waitlistees = waitlisteesCollection;
 }
  
@@ -48,11 +48,11 @@ async function applySchemaValidation(db: mongodb.Db) {
  
    // Try applying the modification to the collection, if the collection doesn't exist, create it
   await db.command({
-       collMod: "waitlistees2",
+       collMod: "waitlistees",
        validator: jsonSchema
    }).catch(async (error: mongodb.MongoServerError) => {
        if (error.codeName === 'NamespaceNotFound') {
-           await db.createCollection("waitlistees2", {validator: jsonSchema});
+           await db.createCollection("waitlistees", {validator: jsonSchema});
        }
    });
 }
