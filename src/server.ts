@@ -3,9 +3,11 @@ import cors from "cors";
 import express from "express";
 import { connectToDatabase } from "./database";
 import { connectToDatabase2 } from "./database2";
+import { connectToDatabase3 } from "./database3";
 import { employeeRouter } from "./employee.routes";
 
 import { userRouter } from "./user.routes";
+import { waitlisteeRouter } from "./waitlistee.routes";
 
 // Load environment variables from the .env file, where the ATLAS_URI is configured
 dotenv.config();
@@ -47,7 +49,7 @@ if (!ATLAS_URI) {
 
 
     
-connectToDatabase2(ATLAS_URI)
+connectToDatabase3(ATLAS_URI)
 .then(() => {
     const app = express();
 
@@ -66,7 +68,8 @@ connectToDatabase2(ATLAS_URI)
     app.use(cors({}));
 
     //before ni sha then bunch of endpoints
-    app.use("/users", userRouter);
+    //app.use("/users", userRouter);
+    app.use("/waitlistees", waitlisteeRouter);
 
     const port = process.env.PORT || 5000;
     //port = 6000;
